@@ -42,34 +42,52 @@
             </div>
         </nav>
         <!-- 主体: 侧边栏 + 内容区 -->
-        <aside class="nav-side">
+        <aside :class="['nav-side', { 'nav-side-collapsed': isCollapsed }]">
             <div class="nav-side-top">
-                <span class="nav-side-item">
+                <span class="nav-side-item-top">
                     <i class="bi bi-house-door"></i>主菜单
                 </span>
             </div>
             <nav class="nav-side-menu">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <i class="bi bi-menu-button-wide me-1"></i> 侧边栏菜单项1
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item nav-side-item">
+                        
+                        <a class="nav-link d-flex align-items-center active" data-bs-toggle="collapse" href="#menu1" role="button">
+                            <i class="bi bi-menu-button-wide"></i>
+                            <span class="menu-text">侧边栏菜单项</span>
+                        </a>
+                        <div class="collapse" id="menu1">
+                            <ul class="nav flex-column ms-3">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">子菜单1</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">子菜单2</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <i class="bi bi-journal-text"></i>侧边栏菜单项2
+                    <li class="nav-item nav-side-item">
+                        <i class="bi bi-journal-text"></i><span class="menu-text">侧边栏菜单项2</span>
                     </li>
-                    <li class="nav-item">
-                        <i class="bi bi-journal-text"></i>侧边栏菜单项3
+                    <li class="nav-item nav-side-item">
+                        <i class="bi bi-journal-text"></i><span class="menu-text">侧边栏菜单项3</span>
                     </li>
                 </ul>
             </nav>
-            <div class="nav-side-bottom">
-                <i class="bi bi-chevron-double-left"></i><i class="bi bi-chevron-double-left"></i>
+            <div class="nav-side-bottom" @click="toggleSidebar">
+                <i class="bi bi-chevron-double-left"></i><i class="bi bi-chevron-double-left"></i><span class="menu-text">点击隐藏侧边栏</span>
             </div>
         </aside>
     </div>
 </template>
 <script setup>
 import { ref, computed, watch } from 'vue';
-
+const isCollapsed = ref(false);
+const toggleSidebar = () => {
+    //点击隐藏侧边栏
+isCollapsed.value = !isCollapsed.value;
+};
 </script>
 <style scoped>
 .nav-top {
@@ -144,7 +162,7 @@ import { ref, computed, watch } from 'vue';
     font-size: 30px;
     cursor: pointer;
 }
-
+/* 侧边栏样式 */
 .nav-side {
     width: 200px;
     height: calc(100vh - 60px);
@@ -157,19 +175,44 @@ import { ref, computed, watch } from 'vue';
     display: flex;
     flex-direction: column;
 }
+.nav-side-collapsed {
+  width: 60px; /* 收起宽度，仅容纳图标 */
+}
+.nav-side-collapsed .menu-text {
+  display: none;
+}
 
-.nav-side-item {
-    display: flex;
-    align-items: center;
+.nav-side-menu .nav .active {
+    background: linear-gradient(145deg, #2563eb, #1d4ed8);
+    color: white;
+    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.15);
+}
+
+.nav-item .nav-link i {
+    margin-right: 8px;
+}
+
+.nav-side-item-top {
     padding: 5px 15px;
     border-radius: 5px;
 }
 
-.nav-side-item:hover {
+.nav-item {
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.nav-item:hover {
     background-color: #e9ecef;
 }
 
-.nav-side-item i {
-    margin-right: 10px;
+.collapse .nav-item:hover {
+    background-color: #def084;
+}
+.nav-side-bottom {
+    /* 固定在底部 */
+    margin-top: auto;
+    background-color: #1d4ed8;
+    cursor: pointer;
 }
 </style>
