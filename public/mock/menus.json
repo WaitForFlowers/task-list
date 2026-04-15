@@ -1,0 +1,41 @@
+[
+  {
+    "name": "系统管理",
+    "code": "system",
+    "children": [
+      {
+        "name": "用户管理",
+        "path": "/system/user",
+        "icon": "bi-person",
+        "component": "system/User.vue"
+      }
+    ]
+  },
+  {
+    "name": "内容管理",
+    "code": "content",
+    "children": [
+      {
+        "name": "文章管理",
+        "code": "article",
+        "icon": "bi-menu-button-wide",
+        "children": [
+          {
+            "name": "文章列表",
+            "code": "articleList",
+            "path": "/content/article/list",
+            "icon": "bi-file",
+            "component": "content/article/ArticleList.vue"
+          },
+          {
+            "name": "文章分类",
+            "code": "articleCategory",
+            "path": "/content/article/category",
+            "icon": "bi-journals",
+            "component": "content/article/ArticleCategory.vue"
+          }
+        ]
+      }
+    ]
+  }
+]

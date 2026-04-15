@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/components/layout/LayoutMain.vue'
+import HomeView from '@/views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,5 +19,25 @@ const router = createRouter({
     },
   ],
 })
+
+// 动态加载路由
+export function loadDynamicRoutes(menuList) {
+  addRoute(menuList)
+}
+function addRoute(menuList) {
+  menuList.forEach((menu) => {
+    if (menu.children) {
+      addRoute(menu.children)
+    } else {
+      const route = {
+        path: menu.path,
+        name: menu.name,
+        component: () => import(`@/${menu.component}`),
+      }
+      console.log(route)
+      router.addRoute(route)
+    }
+  })
+}
 
 export default router

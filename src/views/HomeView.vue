@@ -1,9 +1,11 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <h1>欢迎来到任务列表系统</h1>
+                <p>这是一个基于Vue3和Bootstrap5的任务管理系统。</p>
+                <p>在这里，您可以创建、编辑和管理您的任务，轻松跟踪项目进度。</p>
+                <p>使用侧边栏导航访问不同的功能模块，如任务列表、报告等。</p>
+                <p>点击左侧的菜单图标可以展开或收起侧边栏，提升您的使用体验。</p>
+                
 </template>
