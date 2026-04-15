@@ -53,11 +53,11 @@
                             <a class="nav-link d-flex align-items-center" data-bs-toggle="collapse" :href=" '#'+ item.code "
                                 role="button">
                                 <i :class="['bi',item.icon]"></i>
-                                <router-link :to="item.path" v-if="item.children" 
+                                <span v-if="item.children" class="menu-text">{{ item.name }}</span>
+                                <router-link :to="item.path" v-else
                                 :class="['menu-text',{ 'active': item.code === selectMenu }]"
                                 @click="selectMenu = item.code"
                                 >{{ item.name }}</router-link>
-                                <span v-else class="menu-text">{{ item.name }}</span>
                             </a>
                             <div class="collapse" :id="item.code" v-if="item.children">
                                 <ul class="nav flex-column ms-1">
@@ -240,9 +240,17 @@ onMounted(async () => {
     transition: all 0.15s;
 }
 
+.nav-side-menu .nav-link:hover {
+    background-color: #4f93f8;
+}
+
 .nav-side-menu .nav-link i {
     font-size: 1.2rem;
     opacity: 0.8;
+}
+.nav-link a{
+    color: inherit;
+    text-decoration: none;
 }
 
 .nav-side-bottom {
